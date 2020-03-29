@@ -1,7 +1,7 @@
 import requests as rq
 import pandas as pd
 
-class executadas:
+class exec:
     def __init__ (self, efile, esite, elist):
         self.list = elist # list of tables fetched from the website
         self.site = esite # df to work with website contents
