@@ -10,6 +10,7 @@ class executadas:
 # Read the page's table
 url = "https://www.praticagem.org.br/asp/executadas.asp"
 contents = rq.get(url).content
+contents = contents.replace(b",", b".")
 executadas.list = pd.read_html(contents)
 executadas.site = executadas.list[-1]
 
@@ -18,7 +19,13 @@ executadas.site = executadas.site.drop([0, 1]) # remove 2 top rows
 executadas.site = executadas.site.drop([7, 9, 11, 12, 13, 14], axis=1) # remove other columns
 executadas.site.columns = executadas.site.iloc[0] # first row as headers
 executadas.site = executadas.site.drop([2]) # remove first row
+executadas.site["Data"] = executadas.site["Data"] + " " + executadas.site["Hora"] # concat date+hour
+executadas.site = executadas.site.drop(["Hora"], axis=1) # remove column hour
+executadas.site["Data"] = pd.to_datetime(executadas.site["Data"], format="%d/%m/%Y %H:%M") # changed type
+executadas.site = executadas.site.astype({"Calado": "float64"}) # changed type
+executadas.site = executadas.site.sort_values(by=["Data"]) # sorted by datetime
 print(executadas.site)
+#executadas.site.to_csv("manoeuvres.csv") # to create the csv for the first time
 
 # Read manoeuvres.csv to a dataframe
 
