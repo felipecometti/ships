@@ -38,6 +38,8 @@ exec.file = pd.read_csv(path)
 print(exec.site.loc[exec.site['Data'].isin(exec.file.tail(1)['Data']) \
     & exec.site['Nome'].isin(exec.file.tail(1)['Nome'])])
 
+# Drop the rest of the lines
+
 # Append rest of the .site to the end of .file
 
 # THE END
