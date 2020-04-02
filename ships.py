@@ -26,18 +26,17 @@ exec.site = exec.site.drop(["Hora"], axis=1)                                    
 exec.site["Data"] = pd.to_datetime(exec.site["Data"], format="%d/%m/%Y %H:%M")  # changed type
 exec.site = exec.site.astype({"Calado": "float64"})                             # changed type
 exec.site = exec.site.sort_values(by=["Data"])                                  # sorted by datetime
-print(exec.site)
+#print(exec.site[312])
 
 # Read manoeuvres.csv to exec.file
 path = os.path.join(os.path.dirname(__file__), "manoeuvres.csv")
 exec.file = pd.read_csv(path)
-#print(exec.file)
+#print(exec.file.tail(1)['Nome'])
 
-# Before next step: find out if we can compare a row in a dataframe to a single row dataframe
+# Find the index of the only row equal to the last row of manoeuvres.csv
 
-
-# Bf nxt: FOIWC find an specific row in a df whr all it's cntt matches a single row df
-# Find the index of the first row equal to the last row of manoeuvres.csv
+print(exec.site.loc[exec.site['Data'].isin(exec.file.tail(1)['Data']) \
+    & exec.site['Nome'].isin(exec.file.tail(1)['Nome'])])
 
 # Append rest of the .site to the end of .file
 
