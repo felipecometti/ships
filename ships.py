@@ -26,20 +26,21 @@ exec.site = exec.site.drop(["Hora"], axis=1)                                    
 exec.site["Data"] = pd.to_datetime(exec.site["Data"], format="%d/%m/%Y %H:%M")  # changed type
 exec.site = exec.site.astype({"Calado": "float64"})                             # changed type
 exec.site = exec.site.sort_values(by=["Data"])                                  # sorted by datetime
-#print(exec.site[312])
 
 # Read manoeuvres.csv to exec.file
 path = os.path.join(os.path.dirname(__file__), "manoeuvres.csv")
 exec.file = pd.read_csv(path)
-#print(exec.file.tail(1)['Nome'])
 
 # Find the index of the only row equal to the last row of manoeuvres.csv
+n = int(exec.site.loc[exec.site['Data'].isin(exec.file.tail(1)['Data']) \
+    & exec.site['Nome'].isin(exec.file.tail(1)['Nome'])].index[0])
 
-print(exec.site.loc[exec.site['Data'].isin(exec.file.tail(1)['Data']) \
-    & exec.site['Nome'].isin(exec.file.tail(1)['Nome'])])
-
-# Drop the rest of the lines
+# Drop the rest of the lines (3 removed on treatment)
+n = n-3
+exec.site = exec.site.iloc[-n:]
 
 # Append rest of the .site to the end of .file
+exec.file = exec.file.append(exec.site)
+exec.file.to_csv("manoeuvres.csv", index=False)
 
 # THE END

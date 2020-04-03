@@ -11,9 +11,9 @@ Well, turns out the harbour pilot's have some information available on their web
 
 ## Project
 
-Our goal is to automate that task of going to their website, reading the table and adding the new values into an spreadsheet, so we can collect more than one month of data.
+The goal is to automate that task of going to their website, reading the table and adding the new values into an spreadsheet, so we can collect more than one month of data.
 
-### Tools (I think I’ll use)
+### Tools (I think I'll use)
 
 * Python 3.7
 * Requests lib
