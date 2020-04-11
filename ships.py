@@ -28,7 +28,8 @@ exec.site = exec.site.sort_values(by=["Data"])                                  
 
 # Read manoeuvres.csv to exec.file (and create if it doesn't exist)
 try:
-    open("manoeuvres.csv", "x")
+    f = open("manoeuvres.csv", "x")
+    f.close()
     exec.site.to_csv("manoeuvres.csv")
 except FileExistsError:
     exec.file = pd.read_csv("manoeuvres.csv")
