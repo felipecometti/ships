@@ -1,6 +1,5 @@
 import requests as rq
 import pandas as pd
-import os
 
 class exec:
     def __init__ (self, efile, esite, elist):
