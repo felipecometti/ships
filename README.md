@@ -1,5 +1,5 @@
 # ships
-A script to automate the collection of data from my city's harbour pilot's website.
+A script to automate the collection of data from Vitoria's harbour pilot's website.
 
 ## Motivation
 
